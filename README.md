@@ -1,8 +1,12 @@
 # ProgBot
 
+##### IMPORTANT!
+you need my [libary](http://github.com/mrbesen/Y-Lib)!
+
+
 #### Commands:
 Command | Use
--------------------
+--------|----------
 comment | every thing that isnt a command
 click t | fake a mouse click left Button: l, middle: m, right: r
 move x y | moves the mouse Cursor to the Cordinates x y

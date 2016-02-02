@@ -1,3 +1,8 @@
-loop 5
-press e
-loop end
+wait 15
+the bot will wait 1,5 seconds
+move 0 0
+the mouse will move to the left top
+click l
+the mouse will fake a left click
+pos
+the bot will print the current possition of the mouse
