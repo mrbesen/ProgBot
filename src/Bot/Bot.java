@@ -12,6 +12,8 @@ public class Bot {
 	private Robot robot;
 	public String[] code;
 
+	private String path = "/home/yannis/Dropbox/eclipse/workspace/Programmable Bot/prog.bot";
+
 	public static void main(String[] args)  {
 		getBot().init();
 	}
@@ -32,22 +34,21 @@ public class Bot {
 	}
 
 	public Bot init() {
-		System.out.println("Enter path to *.bot script-file");
-		String path = (new Scanner(System.in)).nextLine();
+
+		if(path.equalsIgnoreCase("")) {
+			System.out.println("Enter path to *.bot script-file");
+			Scanner sca = new Scanner(System.in);
+			path = sca.nextLine();
+			sca.close();
+		}
 
 		//load programm
 		Y_Filereader fr = new Y_Filereader(path);
 		code = fr.read();
 
 		commandmanager = new CommandManager();
-
-		commandmanager.interpret(code);
-
-		return this;
-	}
-
-	public Bot close() {//called by closed Display
-
+		
+		commandmanager.init().interpret(code);
 
 		return this;
 	}
