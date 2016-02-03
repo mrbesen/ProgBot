@@ -2,7 +2,6 @@ package Bot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import Commands.Command;
 import Commands.Command_Keyboard;
@@ -19,41 +18,20 @@ public class CommandManager {
 	public boolean run = true;
 	public int step = 0;
 	
-	public CommandManager() {
+	public CommandManager init() {
 		cmds.add(new Command_Move());
 		cmds.add(new Command_Wait());
 		cmds.add(new Command_Keyboard());
 		cmds.add(new Command_Mouse());
 		cmds.add(new Command_Position());
 		cmds.add(new Command_Loop());
+		
+		return this;
 	}
 
 
 	public CommandManager interpret(String[] s) {
-		
-		(new Thread(new Runnable() {
-			public void run() {
-				Scanner s = new Scanner(System.in);
-				while(true) {
-					s.nextLine();
-					run = false;
-					System.out.println("Paused");
-					s.nextLine();
-					run = true;
-					System.out.println("Resumed");
-				}
-			}
-		})).start();
-		
-		
-		
-		
-		
-		
-		
-		
 		while(run) {
-			
 			if(step == s.length-1) {
 				run = false;
 				System.exit(0);

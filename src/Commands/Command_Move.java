@@ -1,7 +1,5 @@
 package Commands;
 
-import java.awt.Robot;
-
 import Bot.Bot;
 import Utils.Y_NumberTool;
 
