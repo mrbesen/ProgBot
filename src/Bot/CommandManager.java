@@ -32,13 +32,15 @@ public class CommandManager {
 
 	public CommandManager interpret(String[] s) {
 		while(run) {
-			if(step == s.length-1) {
+			if(step == s.length) {
 				run = false;
 				System.exit(0);
 				break;
 			}
 			
 			String commandl = s[step].trim();
+			
+			System.out.println("Running command: " + commandl);
 			
 			for(Command cmd : cmds) {
 				if(cmd.execute(commandl)) {//sucess
