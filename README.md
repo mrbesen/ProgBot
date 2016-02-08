@@ -45,7 +45,7 @@ press a
 move 0 0
 loop end
 ```
-
+__!!be carfull with them!! dont trigger move to often: you maybe not be able to stop the bot!!!!!!!__
 
 
 example script:
