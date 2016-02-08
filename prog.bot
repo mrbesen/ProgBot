@@ -1,6 +1,4 @@
-loop 3
-wait 15
+loop 120
 move 0 0
-click l
-pos
+wait 10
 loop end
