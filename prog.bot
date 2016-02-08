@@ -1,3 +1,6 @@
-loop 5
-wait 10
+loop 3
+wait 15
+move 0 0
+click l
+pos
 loop end
