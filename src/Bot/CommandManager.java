@@ -9,6 +9,7 @@ import Commands.Command_Loop;
 import Commands.Command_Mouse;
 import Commands.Command_Move;
 import Commands.Command_Position;
+import Commands.Command_Print;
 import Commands.Command_Wait;
 
 public class CommandManager {
@@ -20,11 +21,13 @@ public class CommandManager {
 	
 	public CommandManager init() {
 		cmds.add(new Command_Move());
+		cmds.add(new Command_Print());
 		cmds.add(new Command_Wait());
 		cmds.add(new Command_Keyboard());
 		cmds.add(new Command_Mouse());
 		cmds.add(new Command_Position());
 		cmds.add(new Command_Loop());
+		cmds.add(Bot.getBot().getNumM());
 		
 		return this;
 	}

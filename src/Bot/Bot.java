@@ -11,6 +11,7 @@ public class Bot {
 	public CommandManager commandmanager;
 	private Robot robot;
 	public String[] code;
+	private NummberManager numm;
 
 	private String path = "/home/yannis/Dropbox/eclipse/workspace/Programmable Bot/prog.bot";
 
@@ -31,6 +32,12 @@ public class Bot {
 			} catch (Exception e) {}
 		}
 		return robot;
+	}
+	
+	public NummberManager getNumM() {
+		if (numm == null) 
+			numm = new NummberManager();
+		return numm;
 	}
 
 	public Bot init() {

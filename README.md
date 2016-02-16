@@ -4,19 +4,21 @@
 __you need my [library](http://github.com/mrbesen/Y-Lib)!__
 
 
-#### Commands:
+#### Command-Overview
 Command | Use
 --------|----------
 click t | fake a mouse click left Button: l, middle: m, right: r
 loops | skroll down 
 move x y | moves the mouse Cursor to the Cordinates x y for your security this command has an cooldown!
 press k | "Presses" the Keyboard key
+print a | prints a text to the console
 pos | returns the Position of the mouse
 wait s |make the Bot wait for (s/10) seconds
+var $name | defines a new variable
 
-comments are everything else than a command
+comments are everything else than a command!
 
-__new: loops!__
+### Loops:
 You can make a loop like:
 ```
 loop 5
@@ -46,11 +48,38 @@ move 0 0
 loop end
 ```
 
-
-
-example script:
+### variables:
 ```
-loop 3
+var $x = 5
+loop $x
+wait $x
+loop end
+```
+This code would make a loop 5 times and wait for 0,5 seconds!
+
+Predefinded Variables: 
+$TIME -> the seconds since the 01.01.1970 00:00 UTC
+
+### click
+```
+click l
+wait 10
+click r
+wait 10
+click m
+```
+This one would perform a Mouse Left click, then a right click and then a middle click.
+
+### wait
+```
+wait 10
+```
+This code would just wait for __1__ second.
+
+#### example script:
+```
+var $a = 3
+loop $a
 wait 15
 move 0 0
 click l

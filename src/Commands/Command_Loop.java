@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Bot.CommandManager;
-import Utils.Y_NumberTool;
 
 public class Command_Loop implements Command {
 
@@ -22,8 +21,8 @@ public class Command_Loop implements Command {
 		if(s.startsWith("loop")) {
 			String[] split = s.split(" ", 2);
 			
-			if(Y_NumberTool.is_nummber(split[1])) {//add / replace
-				loops.put(cmdmanager.step, Integer.parseInt(split[1]));
+			if(Bot.Bot.getBot().getNumM().isNum(split[1])) {//add / replace
+				loops.put(cmdmanager.step, Bot.Bot.getBot().getNumM().getNum(split[1]));
 				
 			} else if(split[1].equalsIgnoreCase("end")) {//end of a loop -> remove / jump back
 				for(int i = cmdmanager.step; i >= 0; i--) {

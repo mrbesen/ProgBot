@@ -9,6 +9,7 @@ public class Command_Position implements Command{
 	private int offsetx, offsety;
 	
 	public Command_Position() {
+		//kalibrating...(get offset)
 		int x = MouseInfo.getPointerInfo().getLocation().x;
 		int y = MouseInfo.getPointerInfo().getLocation().y;
 		Bot.getBot().getRobot().mouseMove(0, 0);
