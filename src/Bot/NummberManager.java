@@ -24,13 +24,15 @@ public class NummberManager implements Command{
 	}
 
 	public int getVar(String name) {
+		if(name.startsWith("$")) 
+			name = name.substring(1);
 		if(name.equals("TIME")) {
 			return (int) (System.currentTimeMillis()/1000);
 		}
 		if(vars.containsKey(name)) {//return registered var
 			return vars.get(name);
 		}
-		System.err.println("Variable (" + name +") nicht definiert!");
+		System.err.println("Variable (" + name +") undefined!");
 		return Integer.MAX_VALUE;
 	}
 
@@ -73,12 +75,11 @@ public class NummberManager implements Command{
 			//left side
 			if(split[0].startsWith("$")) {
 				//declare
-				if(Y_NumberTool.is_nummber(split[1])) {//2. teil ist nummer
-					vars.put(split[0].substring(1), Integer.parseInt(split[1]));
-					System.out.println("Var added!");
+				if(isNum(split[1])) {//2. teil ist nummer / variable
+					vars.put(split[0].substring(1), getNum(split[1]));
 				}
 			} else {
-				System.err.println("Variable ungültig!");
+				System.err.println("Variable invalid!");
 				return false;
 			}
 

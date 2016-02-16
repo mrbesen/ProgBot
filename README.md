@@ -17,6 +17,16 @@ wait s |make the Bot wait for (s/10) seconds
 var $name | defines a new variable
 
 comments are everything else than a command!
+### print
+```
+var $x = 5
+print "Hello"
+print $x
+```
+Example output from this script:
+>Hello
+
+>$x = 5
 
 ### Loops:
 You can make a loop like:
@@ -56,6 +66,21 @@ wait $x
 loop end
 ```
 This code would make a loop 5 times and wait for 0,5 seconds!
+
+```
+var $a = 5
+var $b = $a
+var $a = 1
+print $b
+print $a
+```
+Example Output:
+>$b = 5
+
+>$a = 1
+
+So, you can define a variable through another, but they don't stay "linked".
+
 
 Predefinded Variables: 
 $TIME -> the seconds since the 01.01.1970 00:00 UTC

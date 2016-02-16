@@ -42,9 +42,7 @@ public class CommandManager {
 			}
 			
 			String commandl = s[step].trim();
-			
-			System.out.println("Running command: " + commandl);
-			
+		
 			for(Command cmd : cmds) {
 				if(cmd.execute(commandl)) {//sucess
 					try {
