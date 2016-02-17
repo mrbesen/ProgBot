@@ -1,4 +1,7 @@
-loop 120
+var $a = 1 + 2
+loop $a
+wait $a * 5
 move 0 0
-wait 10
+click l
+pos
 loop end

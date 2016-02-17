@@ -1,10 +1,17 @@
 # ProgBot
 
 ##### IMPORTANT!
-__you need my [library](http://github.com/mrbesen/Y-Lib)!__
+__You need my [library](http://github.com/mrbesen/Y-Lib)!__
 
+## To Do / To Add
+- [x] Loops
+- [x] Variables
+- [ ] Random-generator
+- [ ] get Mouse coordinates as variable
+- [ ] statements (if&while)
+- [ ] GUI
 
-#### Command-Overview
+## Command-Overview
 Command | Use
 --------|----------
 click t | fake a mouse click left Button: l, middle: m, right: r
@@ -16,16 +23,17 @@ pos | returns the Position of the mouse
 wait s |make the Bot wait for (s/10) seconds
 var $name | defines a new variable
 
-comments are everything else than a command!
-### print
+__comments start with '#' or "//"!__
+
+### Print
 ```
 var $x = 5
 print "Hello"
 print $x
 ```
 Example output from this script:
->Hello
 
+>Hello
 >$x = 5
 
 ### Loops:
@@ -58,7 +66,7 @@ move 0 0
 loop end
 ```
 
-### variables:
+### Variables:
 ```
 var $x = 5
 loop $x
@@ -76,16 +84,48 @@ print $a
 ```
 Example Output:
 >$b = 5
-
 >$a = 1
 
 So, you can define a variable through another, but they don't stay "linked".
 
+######Predefinded Variables: 
 
-Predefinded Variables: 
 $TIME -> the seconds since the 01.01.1970 00:00 UTC
 
-### click
+###### Some Math
+```
+var $x = 3 * 2
+print $x
+print 3 - 2
+print 20 / 5
+var $b = 22 % 3
+```
+>$x = 6
+>1
+>4
+>1
+
+"Only" one Expression at the time allowed (else the awnser is maybe not correct!)
+
+```
+var $i = 1
+loop 20
+var $i = $i +1
+print 2**$i
+loop end
+```
+This code outputs the 2^x row.
+
+__Allowed Functions:__
++ → add
+- → subtract
+* → multiply
+/ → devide
+** → pow
+% → mod
+
+
+### Click
 ```
 click l
 wait 10
@@ -95,17 +135,17 @@ click m
 ```
 This one would perform a Mouse Left click, then a right click and then a middle click.
 
-### wait
+### Wait
 ```
 wait 10
 ```
 This code would just wait for __1__ second.
 
-#### example script:
+#### Example script:
 ```
-var $a = 3
+var $a = 1 + 2
 loop $a
-wait 15
+wait $a * 5
 move 0 0
 click l
 pos

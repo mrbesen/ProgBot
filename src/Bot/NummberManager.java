@@ -13,14 +13,19 @@ public class NummberManager implements Command{
 	public int getNum(String num) {//num -> potenzielle nummer
 		num = num.trim().replace(" ", "");//remove useles space
 
+		if(isCalc(num)) {
+			return getCalc(num);
+		}
+		
+		if(isVar(num)) {//is var?
+			return (getVar(num.substring(1)));
+		}
+		
 		if(Y_NumberTool.is_nummber(num)) {//is num?
 			return (Integer.parseInt(num));
 		}
 
-		if(isVar(num)) {//is var?
-			return (getVar(num.substring(1)));
-		}
-		return Integer.MAX_VALUE;
+		return Integer.MAX_VALUE;//error
 	}
 
 	public int getVar(String name) {
@@ -33,30 +38,65 @@ public class NummberManager implements Command{
 			return vars.get(name);
 		}
 		System.err.println("Variable (" + name +") undefined!");
-		return Integer.MAX_VALUE;
+		return Integer.MAX_VALUE;//error
+	}
+	
+	public int getCalc(String str) {
+		if(str.contains("**")) {//pot
+			String[] split = str.split("\\*\\*",2);
+			return (int) (Math.pow(getNum(split[0]), getNum(split[1])));
+		}
+		if(str.contains("%")) {//mod
+			String[] split = str.split("%",2);
+			return getNum(split[0]) % getNum(split[1]);
+		}
+		if(str.contains("+")) {//simple math
+			String[] split = str.split("\\+",2);
+			return getNum(split[0]) + getNum(split[1]);
+		} 
+		if(str.contains("-")) {
+			String[] split = str.split("-",2);
+			return getNum(split[0]) - getNum(split[1]);
+		}
+		if(str.contains("*")) {
+			String[] split = str.split("\\*",2);
+			return getNum(split[0]) * getNum(split[1]);
+		}
+		if(str.contains("/")) {
+			String[] split = str.split("/",2);
+			return getNum(split[0]) / getNum(split[1]);
+		}
+		return Integer.MAX_VALUE;//error
 	}
 
 	//================================================format
 
 	public String format(String num) {
-		if(isVar(num)) {
+		if(isCalc(num)) {
+			return ("" + getCalc(num));
+		}		
+		
+		if(isVar(num)) {//var
 			return (num + " = " + getVar(num.substring(1)));
 		}
-
-		return num;
+		return num;//normal nummber
 	}
 	//========================================test
 	public boolean isNum(String num) {
 		num = num.trim();//remove useles space
 
-		if(Y_NumberTool.is_nummber(num) | isVar(num) ) {
+		if(Y_NumberTool.is_nummber(num) | isVar(num) | isCalc(num)) {
 			return true;
 		}
 		return false;
 	}
 
-	public boolean isVar(String var) {
+	public boolean isVar(String var) {//is variable
 		return var.startsWith("$");
+	}
+	
+	public boolean isCalc(String var) {//is calc
+		return (var.contains("+") | var.contains("-") | var.contains("*") | var.contains("/") | var.contains("%") );
 	}
 	//=================================command stuff
 	@Override
@@ -68,7 +108,6 @@ public class NummberManager implements Command{
 	public boolean execute(String s) {
 		if(s.startsWith("var")) {//var $v = d
 			s = s.substring(3).replace(" ", "");//remove var & spaces
-
 
 			String[] split = s.split("=",2);
 
@@ -82,10 +121,8 @@ public class NummberManager implements Command{
 				System.err.println("Variable invalid!");
 				return false;
 			}
-
 			return true;
 		}
 		return false;
 	}
-
 }

@@ -18,7 +18,7 @@ public class CommandManager {
 
 	public boolean run = true;
 	public int step = 0;
-	
+
 	public CommandManager init() {
 		cmds.add(new Command_Move());
 		cmds.add(new Command_Print());
@@ -28,7 +28,7 @@ public class CommandManager {
 		cmds.add(new Command_Position());
 		cmds.add(new Command_Loop());
 		cmds.add(Bot.getBot().getNumM());
-		
+
 		return this;
 	}
 
@@ -40,15 +40,17 @@ public class CommandManager {
 				System.exit(0);
 				break;
 			}
-			
+
 			String commandl = s[step].trim();
-		
-			for(Command cmd : cmds) {
-				if(cmd.execute(commandl)) {//sucess
-					try {
-						Thread.sleep(5);
-					} catch(Exception e) {}
-					break;
+
+			if(!commandl.startsWith("#") & !commandl.startsWith("//"))  {//comment
+				for(Command cmd : cmds) {
+					if(cmd.execute(commandl)) {//sucess
+						try {
+							Thread.sleep(5);
+						} catch(Exception e) {}
+						break;
+					}
 				}
 			}
 			step ++;
