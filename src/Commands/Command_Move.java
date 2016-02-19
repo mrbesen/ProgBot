@@ -42,5 +42,4 @@ public class Command_Move implements Command {
 		}
 		return false;
 	}
-
 }

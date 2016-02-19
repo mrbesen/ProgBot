@@ -16,11 +16,11 @@ public class NummberManager implements Command{
 		if(isCalc(num)) {
 			return getCalc(num);
 		}
-		
+
 		if(isVar(num)) {//is var?
 			return (getVar(num.substring(1)));
 		}
-		
+
 		if(Y_NumberTool.is_nummber(num)) {//is num?
 			return (Integer.parseInt(num));
 		}
@@ -29,7 +29,7 @@ public class NummberManager implements Command{
 	}
 
 	public int getVar(String name) {
-		if(name.startsWith("$")) 
+		if(name.startsWith("$"))//remove init part
 			name = name.substring(1);
 		if(name.equals("TIME")) {
 			return (int) (System.currentTimeMillis()/1000);
@@ -40,7 +40,7 @@ public class NummberManager implements Command{
 		System.err.println("Variable (" + name +") undefined!");
 		return Integer.MAX_VALUE;//error
 	}
-	
+
 	public int getCalc(String str) {
 		if(str.contains("**")) {//pot
 			String[] split = str.split("\\*\\*",2);
@@ -50,14 +50,6 @@ public class NummberManager implements Command{
 			String[] split = str.split("%",2);
 			return getNum(split[0]) % getNum(split[1]);
 		}
-		if(str.contains("+")) {//simple math
-			String[] split = str.split("\\+",2);
-			return getNum(split[0]) + getNum(split[1]);
-		} 
-		if(str.contains("-")) {
-			String[] split = str.split("-",2);
-			return getNum(split[0]) - getNum(split[1]);
-		}
 		if(str.contains("*")) {
 			String[] split = str.split("\\*",2);
 			return getNum(split[0]) * getNum(split[1]);
@@ -65,6 +57,14 @@ public class NummberManager implements Command{
 		if(str.contains("/")) {
 			String[] split = str.split("/",2);
 			return getNum(split[0]) / getNum(split[1]);
+		}
+		if(str.contains("+")) {//simple math
+			String[] split = str.split("\\+",2);
+			return getNum(split[0]) + getNum(split[1]);
+		} 
+		if(str.contains("-")) {
+			String[] split = str.split("-",2);
+			return getNum(split[0]) - getNum(split[1]);
 		}
 		return Integer.MAX_VALUE;//error
 	}
@@ -75,7 +75,7 @@ public class NummberManager implements Command{
 		if(isCalc(num)) {
 			return ("" + getCalc(num));
 		}		
-		
+
 		if(isVar(num)) {//var
 			return (num + " = " + getVar(num.substring(1)));
 		}
@@ -94,7 +94,7 @@ public class NummberManager implements Command{
 	public boolean isVar(String var) {//is variable
 		return var.startsWith("$");
 	}
-	
+
 	public boolean isCalc(String var) {//is calc
 		return (var.contains("+") | var.contains("-") | var.contains("*") | var.contains("/") | var.contains("%") );
 	}
@@ -106,21 +106,21 @@ public class NummberManager implements Command{
 
 	@Override
 	public boolean execute(String s) {
-		if(s.startsWith("var")) {//var $v = d
-			s = s.substring(3).replace(" ", "");//remove var & spaces
+		if(s.startsWith("var") | s.startsWith("$")) {//var $v = d
 
+			s = s.substring(3).replace(" ", "");//remove var & spaces
 			String[] split = s.split("=",2);
 
+			//declare
 			//left side
-			if(split[0].startsWith("$")) {
-				//declare
-				if(isNum(split[1])) {//2. teil ist nummer / variable
-					vars.put(split[0].substring(1), getNum(split[1]));
-				}
-			} else {
-				System.err.println("Variable invalid!");
-				return false;
+			String name = split[0];
+			if(name.startsWith("$")) {
+				name = name.substring(1);
 			}
+			if(isNum(split[1])) {//right side / content
+				vars.put(name, getNum(split[1]));
+			}
+
 			return true;
 		}
 		return false;

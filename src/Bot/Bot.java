@@ -8,7 +8,7 @@ import Files.Y_Filereader;
 public class Bot {
 
 	private static Bot bot;
-	public CommandManager commandmanager;
+	private CommandManager commandmanager;
 	private Robot robot;
 	public String[] code;
 	private NummberManager numm;
@@ -18,7 +18,10 @@ public class Bot {
 	public static void main(String[] args)  {
 		getBot().init();
 	}
-
+	
+	
+	//============================gets
+	
 	public static Bot getBot() {
 		if(bot== null) 
 			bot = new Bot();
@@ -39,6 +42,15 @@ public class Bot {
 			numm = new NummberManager();
 		return numm;
 	}
+	
+	public CommandManager getCmdManager() {
+		if(commandmanager == null)
+			commandmanager = new CommandManager();
+		return commandmanager;
+	}
+	
+	
+	
 
 	public Bot init() {
 
@@ -53,9 +65,9 @@ public class Bot {
 		Y_Filereader fr = new Y_Filereader(path);
 		code = fr.read();
 
-		commandmanager = new CommandManager();
-		
-		commandmanager.init().interpret(code);
+
+		CommandManager.init();
+		getCmdManager().interpret(code);
 
 		return this;
 	}

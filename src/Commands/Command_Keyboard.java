@@ -10,7 +10,7 @@ public class Command_Keyboard implements Command{
 
 	@Override
 	public String getName() {
-		return "keyboard";
+		return "press";
 	}
 
 	@Override

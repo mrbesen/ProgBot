@@ -1,6 +1,8 @@
 package Bot;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import Commands.Command;
@@ -12,14 +14,15 @@ import Commands.Command_Position;
 import Commands.Command_Print;
 import Commands.Command_Wait;
 
-public class CommandManager {
+public class CommandManager implements Collection<Command>{
 
-	List<Command> cmds = new ArrayList<Command>();
+	public static List<Command> cmds = new ArrayList<Command>();
 
 	public boolean run = true;
 	public int step = 0;
+	public int stack_depth = 0;
 
-	public CommandManager init() {
+	public static void init() {
 		cmds.add(new Command_Move());
 		cmds.add(new Command_Print());
 		cmds.add(new Command_Wait());
@@ -27,17 +30,17 @@ public class CommandManager {
 		cmds.add(new Command_Mouse());
 		cmds.add(new Command_Position());
 		cmds.add(new Command_Loop());
+		
+		
 		cmds.add(Bot.getBot().getNumM());
-
-		return this;
+		cmds.add(new FunctionManager());
 	}
 
 
-	public CommandManager interpret(String[] s) {
+	public void interpret(String[] s) {
 		while(run) {
 			if(step == s.length) {
 				run = false;
-				System.exit(0);
 				break;
 			}
 
@@ -46,15 +49,93 @@ public class CommandManager {
 			if(!commandl.startsWith("#") & !commandl.startsWith("//"))  {//comment
 				for(Command cmd : cmds) {
 					if(cmd.execute(commandl)) {//sucess
-						try {
-							Thread.sleep(5);
-						} catch(Exception e) {}
 						break;
 					}
 				}
 			}
 			step ++;
 		}
-		return this;
+	}
+
+
+
+
+	//=================================interface
+
+	@Override
+	public boolean add(Command e) {
+		return cmds.add(e);
+	}
+
+
+	@Override
+	public boolean addAll(Collection<? extends Command> c) {
+		return cmds.addAll(c);
+	}
+
+
+	@Override
+	public void clear() {
+		cmds.clear();
+	}
+
+
+	@Override
+	public boolean contains(Object o) {
+		return cmds.contains(o);
+	}
+
+
+	@Override
+	public boolean containsAll(Collection<?> c) {
+		return containsAll(c);
+	}
+
+
+	@Override
+	public boolean isEmpty() {
+		return cmds.isEmpty();
+	}
+
+
+	@Override
+	public Iterator<Command> iterator() {
+		return cmds.iterator();
+	}
+
+
+	@Override
+	public boolean remove(Object o) {
+		return cmds.remove(o);
+	}
+
+
+	@Override
+	public boolean removeAll(Collection<?> c) {
+		return cmds.removeAll(c);
+	}
+
+
+	@Override
+	public boolean retainAll(Collection<?> c) {
+		return retainAll(c);
+	}
+
+
+	@Override
+	public int size() {
+		return cmds.size();
+	}
+
+
+	@Override
+	public Object[] toArray() {
+		return cmds.toArray();
+	}
+
+
+	@Override
+	public <T> T[] toArray(T[] a) {
+		return cmds.toArray(a);
 	}
 }

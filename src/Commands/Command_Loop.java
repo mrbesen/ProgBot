@@ -8,7 +8,7 @@ import Bot.CommandManager;
 public class Command_Loop implements Command {
 
 	Map<Integer, Integer> loops = new HashMap<Integer, Integer>();
-	CommandManager cmdmanager = Bot.Bot.getBot().commandmanager;
+	CommandManager cmdmanager = Bot.Bot.getBot().getCmdManager();
 	
 	
 	@Override
