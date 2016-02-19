@@ -25,7 +25,7 @@ public class NummberManager implements Command{
 			return (Integer.parseInt(num));
 		}
 
-		return Integer.MAX_VALUE;//error
+		return 0;//error
 	}
 
 	public int getVar(String name) {
@@ -37,8 +37,7 @@ public class NummberManager implements Command{
 		if(vars.containsKey(name)) {//return registered var
 			return vars.get(name);
 		}
-		System.err.println("Variable (" + name +") undefined!");
-		return Integer.MAX_VALUE;//error
+		return 0;//error
 	}
 
 	public int getCalc(String str) {
@@ -66,7 +65,7 @@ public class NummberManager implements Command{
 			String[] split = str.split("-",2);
 			return getNum(split[0]) - getNum(split[1]);
 		}
-		return Integer.MAX_VALUE;//error
+		return 0;//error
 	}
 
 	//================================================format

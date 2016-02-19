@@ -1,7 +1,11 @@
-var $a = 1 + 2
-loop $a
-wait $a * 5
+function dostuff {
 move 0 0
 click l
+}
+var $abc = 1 + 2
+loop $abc
+wait $abc * 5
+dostuff
+print $abc
 pos
 loop end

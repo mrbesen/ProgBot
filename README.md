@@ -7,9 +7,12 @@ __You need my [library](http://github.com/mrbesen/Y-Lib)!__
 - [x] Loops
 - [x] Variables
 - [ ] Random-generator
+- [ ] output of Commands as Variable
 - [ ] get Mouse coordinates as variable
 - [ ] statements (if&while)
 - [ ] GUI
+- [ ] 'infinite' as nummber
+- [x] functions
 
 ## Command-Overview
 Command | Use
@@ -24,6 +27,27 @@ wait s |make the Bot wait for (s/10) seconds
 var $name | defines a new variable
 
 __comments start with '#' or "//"!__
+
+```
+#Some Comment
+//Second Comment
+```
+
+###Functions
+
+######Define
+```
+functione name {
+print "Test"
+var $a = 1
+}
+name
+print $a
+```
+This Code would define the function 'name' run it, and print the value of $a (1)
+
+__Functiuns should be defined at the beginning.__ (All Code before will not be able to read the Function)
+
 
 ### Print
 ```
@@ -76,17 +100,22 @@ loop end
 This code would make a loop 5 times and wait for 0,5 seconds!
 
 ```
-var $a = 5
-var $b = $a
-var $a = 1
-print $b
-print $a
+var $test1 = 5
+var $test2 = $test1
+var $test1 = 1
+print $test2
+print $test1
 ```
 Example Output:
->$b = 5
->$a = 1
+>$test2 = 5
+>$test1 = 1
 
 So, you can define a variable through another, but they don't stay "linked".
+
+```
+print $a
+```
+every undefined variable contains '0'.
 
 ######Predefinded Variables: 
 
@@ -117,12 +146,12 @@ loop end
 This code outputs the 2^x row.
 
 __Allowed Functions:__
-+ → add
-- → subtract
-* → multiply
-/ → devide
-** → pow
-% → mod
+- + → add
+- - → subtract
+- * → multiply
+- / → devide
+- ** → pow
+- % → mod
 
 
 ### Click
@@ -143,11 +172,15 @@ This code would just wait for __1__ second.
 
 #### Example script:
 ```
+function dostuff {
+move 0 0
+click l
+}
 var $a = 1 + 2
 loop $a
 wait $a * 5
-move 0 0
-click l
+dostuff
+print $a
 pos
 loop end
 ```
