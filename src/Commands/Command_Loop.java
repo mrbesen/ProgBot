@@ -31,14 +31,12 @@ public class Command_Loop implements Command {
 							loops.put(i, loops.get(i)-1);//subtract to stop after final count
 							cmdmanager.step = i;//wrid von command manager noch erhöt
 							return true;
-						} else if(loops.get(i) == Integer.MIN_VALUE) {//dont count down to make infinite
+						} else if(loops.get(i) == Integer.MAX_VALUE) {//dont count down to make infinite
 							cmdmanager.step = i;//wrid von command manager noch erhöt
 							return true;
 						}
 					}
 				}
-			} else if(split[1].equalsIgnoreCase("infinite")) {
-				loops.put(cmdmanager.step, Integer.MIN_VALUE);
 			}
 			return true;
 		}

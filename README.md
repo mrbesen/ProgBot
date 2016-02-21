@@ -11,7 +11,8 @@ __You need my [library](http://github.com/mrbesen/Y-Lib)!__
 - [ ] get Mouse coordinates as variable
 - [ ] statements (if&while)
 - [ ] GUI
-- [ ] 'infinite' as nummber
+- [x] 'infinite' as nummber
+- [ ] calculate with infinity
 - [x] functions
 
 ## Command-Overview
@@ -34,8 +35,6 @@ __comments start with '#' or "//"!__
 ```
 
 ###Functions
-
-######Define
 ```
 functione name {
 print "Test"
@@ -44,7 +43,7 @@ var $a = 1
 name
 print $a
 ```
-This Code would define the function 'name' run it, and print the value of $a (1)
+This code would define the function 'name' and run it, after that it prints the value of $a (1)
 
 __Functiuns should be defined at the beginning.__ (All Code before will not be able to read the Function)
 
@@ -134,7 +133,7 @@ var $b = 22 % 3
 >4
 >1
 
-"Only" one Expression at the time allowed (else the awnser is maybe not correct!)
+The programm dosen't understand math rules so just use brackets: "($a*2)+2"
 
 ```
 var $i = 1
