@@ -57,27 +57,29 @@ public class NummberManager implements Command{
 		});
 	}
 
-
 	//=========================================================get
 	public int getNum(String num) {//num -> potenzielle nummer
-		num = num.trim().replace(" ", "");//remove useles space
+		num = num.trim();//.replace(" ", "");//remove useles space (nichtmehr, falls cmd)
+
+		if(Y_NumberTool.is_nummber(num.replace(" ", ""))) //is num?
+			return (Integer.parseInt(num));
+		
+		if(isCalc(num)) 
+			return getCalc(num);
+		
+		if(isCmd(num))
+			return getCmd(num);
 
 		if(isBracket(num)) {
 			return getBracket(num);
 		}
 
-		if(isCalc(num)) 
-			return getCalc(num);
-
 		if(isVar(num)) //is var?
 			return (getVar(num.substring(1)));
 
-		if(Y_NumberTool.is_nummber(num)) //is num?
-			return (Integer.parseInt(num));
-
 		if(num.equalsIgnoreCase("infinite")) 
 			return Integer.MAX_VALUE;
-
+		
 		return 0;//error
 	}
 
@@ -133,26 +135,32 @@ public class NummberManager implements Command{
 		return (getNum(var));
 	}
 
+	public int getCmd(String cmd) {
+		int ret = Bot.getBot().getCmdManager().interpretSingle(cmd);
+		if (ret != Integer.MIN_VALUE)
+			return ret;
+		return 0;
+	}
+
 	//================================================format
-
 	public String format(String num) {
-		if(isCalc(num)) {
-			return ("" + getCalc(num));
-		}		
 
-		if(isVar(num)) {//var
-			return (num + " = " + getVar(num.substring(1)));
-		}
+		if(isCalc(num))
+			return ("" + getCalc(num));
+
+		if(isVar(num)) //var
+			return (num +" = " + getVar(num.substring(1)));
+
+		if(isCmd(num)) 
+			return "" + getCmd(num);
+
 		return num;//normal nummber
 	}
 	//========================================test
 	public boolean isNum(String num) {
 		num = num.trim();//remove useles space
 
-		if(Y_NumberTool.is_nummber(num) | num.equalsIgnoreCase("infinite") | isVar(num) | isCalc(num) | isBracket(num)) {
-			return true;
-		}
-		return false;
+		return (Y_NumberTool.is_nummber(num) | num.equalsIgnoreCase("infinite") | isVar(num) | isCalc(num) | isBracket(num) | isCmd(num));
 	}
 
 	public boolean isVar(String var) {//is variable
@@ -160,19 +168,24 @@ public class NummberManager implements Command{
 	}
 
 	public boolean isCalc(String var) {//is calc
+		var = var.toLowerCase().trim().replace(" ", "");
 		for(Calculation ca : calcs) {
 			if(var.contains(ca.sign))
 				return true;
 		}
-		return false;
-
-		//return (var.contains("+") | var.contains("-") | var.contains("*") | var.contains("/") | var.contains("%") );
+//		return false;
+		return (var.contains("+") | var.contains("-") | var.contains("*") | var.contains("/") | var.contains("%") );
 	}
 
 	public boolean isBracket(String var) {
-//		System.out.println(var + "  " + (var.trim().startsWith("(") & var.trim().endsWith(")")));
+		//		System.out.println(var + "  " + (var.trim().startsWith("(") & var.trim().endsWith(")")));
 		return (var.trim().startsWith("(") & var.trim().endsWith(")"));
 	}
+
+	public boolean isCmd(String cmd) {
+		return (Bot.getBot().getCmdManager().isCmd(cmd) & !cmd.startsWith("$"));
+	}
+
 	//=================================command stuff
 	@Override
 	public String getName() {
@@ -180,24 +193,29 @@ public class NummberManager implements Command{
 	}
 
 	@Override
-	public boolean execute(String s) {
-		if(s.startsWith("var") | s.startsWith("$")) {//var $v = d TODO: imposible to define var with $test = 4 wegen substring(3)
+	public int execute(String s) {
+		if(s.startsWith("var")) {//TODO define var without var ($x = 1)
 
-			s = s.substring(3).replace(" ", "");//remove var & spaces
+			s = s.substring(3);//.replace(" ", "");//remove var & spaces
 			String[] split = s.split("=",2);
 
 			//declare
 			//left side
-			String name = split[0];
+			String name = split[0].trim();
 			if(name.startsWith("$")) {
 				name = name.substring(1);
 			}
 			if(isNum(split[1])) {//right side / content
 				vars.put(name, getNum(split[1]));
-				return true;
+				return 1;
 			}
 		}
-		return false;
+		return Integer.MIN_VALUE;
+	}
+
+	@Override
+	public boolean canExecute(String cmd) {
+		return cmd.startsWith("var");
 	}
 
 	//======================================================
@@ -227,4 +245,5 @@ public class NummberManager implements Command{
 
 		public abstract int calc_(int a, int b);
 	}
+
 }

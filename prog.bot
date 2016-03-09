@@ -1,11 +1,13 @@
 function dostuff {
-move 0 0
+move $x $y
 click l
 }
 var $abc = 1 + 2
+wait 20
 loop $abc
 wait $abc * 5
+var $x = pos x
+var $y = pos 2
 dostuff
 print $abc
-pos
 loop end

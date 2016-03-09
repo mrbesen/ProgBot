@@ -7,12 +7,11 @@ __You need my [library](http://github.com/mrbesen/Y-Lib)!__
 - [x] Loops
 - [x] Variables
 - [ ] Random-generator
-- [ ] output of Commands as Variable
-- [ ] get Mouse coordinates as variable
+- [x] output of Commands as Variable
+- [x] get Mouse coordinates as variable
 - [ ] statements (if&while)
 - [ ] GUI
 - [x] 'infinite' as nummber
-- [ ] calculate with infinity
 - [x] functions
 
 ## Command-Overview
@@ -116,6 +115,14 @@ print $a
 ```
 every undefined variable contains '0'.
 
+You can now store the output off an command in a variable!
+```
+var $test = pos x
+print $test
+```
+
+This would print out the x-cordinates of the Mouse
+
 ######Predefinded Variables: 
 
 $TIME -> the seconds since the 01.01.1970 00:00 UTC
@@ -133,7 +140,7 @@ var $b = 22 % 3
 >4
 >1
 
-The programm dosen't understand math rules so just use brackets: "($a*2)+2"
+"Only" one Expression at the time allowed (else the awnser is _maybe_ not correct!)
 
 ```
 var $i = 1
@@ -169,17 +176,49 @@ wait 10
 ```
 This code would just wait for __1__ second.
 
+### Pos
+This command allows, to view the x and y cordinates of the Current Mouse Position.
+```
+pos
+```
+
+You can store one cordinate at the time in a variable
+```
+var $x = pos x
+print $
+
+//or
+var $x = pos 1
+print $x
+
+
+//for y:
+var $y = pos y
+
+//or
+var $y = pos 2
+```
+of course, the name of the variable is not important.
+You can also store the nummber of the corrdinate in a var like:
+```
+var $t = 1
+var $xa = pos $t
+print $xa
+```
+
 #### Example script:
 ```
 function dostuff {
-move 0 0
+move $x $y
 click l
 }
-var $a = 1 + 2
-loop $a
-wait $a * 5
+var $abc = 1 + 2
+wait 20
+loop $abc
+wait $abc * 5
+var $x = pos x
+var $y = pos 2
 dostuff
-print $a
-pos
+print $abc
 loop end
 ```

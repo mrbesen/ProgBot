@@ -13,7 +13,7 @@ public class Command_Move implements Command {
 	}
 
 	@Override
-	public boolean execute(String s) {
+	public int execute(String s) {
 		if(s.startsWith("move")) {
 			//cool down stuff:
 			cooldown -= (int) ((System.currentTimeMillis() - lastremoval) / 100);//pro 1/10 second remove one cooldown point.
@@ -35,11 +35,16 @@ public class Command_Move implements Command {
 				Bot.getBot().getRobot().mouseMove(Bot.getBot().getNumM().getNum(split[1]), Bot.getBot().getNumM().getNum(split[2]));
 				System.out.println("Mouse Moved to: (" + (Bot.getBot().getNumM().format(split[1])) + "|" + (Bot.getBot().getNumM().format(split[2])) + ") cooldown: " + cooldown);
 				cooldown = cooldown + 35;//needs to cooldown 2/10 seconds
-				return true;
+				return 1;
 			} else {
 				System.err.println("Command wird ignoriert, da Fehlerhaft: " + s);
 			}
 		}
-		return false;
+		return Integer.MIN_VALUE;
+	}
+
+	@Override
+	public boolean canExecute(String cmd) {
+		return cmd.startsWith("move");
 	}
 }

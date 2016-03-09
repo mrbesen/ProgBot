@@ -14,7 +14,7 @@ public class Command_Keyboard implements Command{
 	}
 
 	@Override
-	public boolean execute(String s) {
+	public int execute(String s) {
 		
 		String split[] = s.split(" ", 2);
 
@@ -35,13 +35,17 @@ public class Command_Keyboard implements Command{
 					Bot.getBot().getRobot().keyRelease(KeyEvent.VK_SHIFT);
 				}
 
-				return true;
+				return 1;
 			} else {
 				System.err.println("Command wird ignoriert, da Fehlerhaft: " + s);
 			}
 		}
 
-		return false;
+		return Integer.MIN_VALUE;
 	}
 
+	@Override
+	public boolean canExecute(String cmd) {
+		return cmd.startsWith("press");
+	}
 }
