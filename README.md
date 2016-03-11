@@ -6,7 +6,7 @@ __You need my [library](http://github.com/mrbesen/Y-Lib)!__
 ## To Do / To Add
 - [x] Loops
 - [x] Variables
-- [ ] Random-generator
+- [x] Random-generator
 - [x] output of Commands as Variable
 - [x] get Mouse coordinates as variable
 - [ ] statements (if&while)
@@ -23,6 +23,7 @@ move x y | moves the mouse Cursor to the Cordinates x y for your security this c
 press k | "Presses" the Keyboard key
 print a | prints a text to the console
 pos | returns the Position of the mouse
+random r | returns a number between 0 and r
 wait s |make the Bot wait for (s/10) seconds
 var $name | defines a new variable
 
@@ -204,6 +205,21 @@ You can also store the nummber of the corrdinate in a var like:
 var $t = 1
 var $xa = pos $t
 print $xa
+```
+
+###Random
+Generates some random numbers
+```
+var $x = random 20
+print $x
+var $y = random $x/3
+print $y
+```
+this would return a number between 0 and 20 and after that a number witch is about a third smaler.
+
+when you leave the argument empty it returns a number between 0 and infinity!
+```
+print random
 ```
 
 #### Example script:

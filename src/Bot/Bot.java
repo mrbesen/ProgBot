@@ -13,7 +13,8 @@ public class Bot {
 	public String[] code;
 	private NummberManager numm;
 
-	private String path = "/home/yannis/Dropbox/eclipse/workspace/Programmable Bot/prog.bot";
+//	private String path = "/home/yannis/Dropbox/eclipse/workspace/Programmable Bot/prog.bot";
+	private String path = "";
 
 	public static void main(String[] args)  {
 		getBot().init();

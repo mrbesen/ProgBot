@@ -12,6 +12,7 @@ import Commands.Command_Mouse;
 import Commands.Command_Move;
 import Commands.Command_Position;
 import Commands.Command_Print;
+import Commands.Command_Random;
 import Commands.Command_Wait;
 
 public class CommandManager implements Collection<Command>{
@@ -30,7 +31,7 @@ public class CommandManager implements Collection<Command>{
 		cmds.add(new Command_Mouse());
 		cmds.add(new Command_Position());
 		cmds.add(new Command_Loop());
-
+		cmds.add(new Command_Random());
 
 		cmds.add(Bot.getBot().getNumM());
 		cmds.add(new FunctionManager());
