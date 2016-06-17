@@ -3,6 +3,10 @@
 ##### IMPORTANT!
 __You need my [library](http://github.com/mrbesen/Y-Lib)!__
 
+## Instllation Guide
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/x57_m1QvJOM/0.jpg)](https://www.youtube.com/watch?v=x57_m1QvJOM)
+
 ## To Do / To Add
 - [x] Loops
 - [x] Variables
