@@ -37,7 +37,7 @@ public class Command_Keyboard implements Command{
 
 				return 1;
 			} else {
-				System.err.println("Command wird ignoriert, da Fehlerhaft: " + s);
+				System.err.println("Command gets ignored because it contains an failure: " + s);
 			}
 		}
 
